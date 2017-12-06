@@ -45,7 +45,7 @@ const abi = [{
     "type": "function"
 }]
 
-const address = '0xdeadbeef123456789000000000000'
+const address = '0xF85D9E6a4B26C973695ab321018c7a66bfE7653E'
 
 function initContract (contract) {
     const MiniToken = contract(abi)
