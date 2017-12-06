@@ -18,13 +18,16 @@
     "metamask"
   ],
   "author": "William Robertson",
-  "license": "Apache2",
+  "license": "Apache 2",
   "bugs": {
     "url": "https://github.com/wjsrobertson/metamask-hello-world/issues"
   },
   "homepage": "https://github.com/wjsrobertson/metamask-hello-world",
   "dependencies": {
-    "lodash": "4.13.1"
+    "lodash": "4.13.1",
+    "ethjs-contract": "0.1.9",
+    "ethjs-query": "0.3.2"
+
   },
   "devDependencies": {
     "browserify": "^13.0.1",
