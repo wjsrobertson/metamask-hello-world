@@ -1,0 +1,35 @@
+{
+  "name": "metamask-hello-world",
+  "version": "0.1.0",
+  "description": "HTML5 user input component for A-Frame VR.",
+  "main": "main.js",
+  "scripts": {
+    "browserify": "browserify src/index.js -s 'UserInput'",
+    "build": "mkdir -p build/ && npm run browserify -- --debug -o build/metamask-hello-world.js",
+    "dev": "npm run build && node ./scripts/budo",
+    "dist": "mkdir -p dist/ && npm run browserify -s -- --debug | exorcist dist/metamask-hello-world.js.map > dist/metamask-hello-world.js && uglifyjs dist/metamask-hello-world.js -c warnings=false -m -o dist/metamask-hello-world.min.js",
+    "test": "karma start ./tests/karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wjsrobertson/metamask-hello-world.git"
+  },
+  "keywords": [
+    "metamask"
+  ],
+  "author": "William Robertson",
+  "license": "Apache2",
+  "bugs": {
+    "url": "https://github.com/wjsrobertson/metamask-hello-world/issues"
+  },
+  "homepage": "https://github.com/wjsrobertson/metamask-hello-world",
+  "dependencies": {
+    "lodash": "4.13.1"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "budo": "^8.3.0",
+    "exorcist": "^0.4.0",
+    "karma": "^0.13.22"
+  }
+}
