@@ -24,19 +24,19 @@ The `npm run dev` step will startup a local server. It will puke out something l
 [0000] info  LiveReload running on 35729
 ```
 
-Then navigate to [http://127.0.0.1:9000/examples/] (or whatever your machine's IP is set to)
+Then navigate to http://127.0.0.1:9000/examples/ (or whatever your machine's IP is set to)
 
 ## Building / Deploying Solidity Contract
 
-The contract is already deployed on the Ropsten test network here: (0xF85D9E6a4B26C973695ab321018c7a66bfE7653E)[https://ropsten.etherscan.io/address/0xF85D9E6a4B26C973695ab321018c7a66bfE7653E]
+The contract is already deployed on the Ropsten test network here: [0xF85D9E6a4B26C973695ab321018c7a66bfE7653E](https://ropsten.etherscan.io/address/0xF85D9E6a4B26C973695ab321018c7a66bfE7653E)
 
-But you can deploy it using the instructions here: `sol/transfer_counter.sol` as per the middle bit of (this tutorial)[[https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e]] - search for_"So go to the Remix IDE and paste the contract"_ to find the right section.
+But you can deploy it using the instructions here: `sol/transfer_counter.sol` as per the middle bit of [this tutorial](https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e) - search for_"So go to the Remix IDE and paste the contract"_ to find the right section.
 
 ## Links
 
 A couple of pages with useful stuff:
 
-[https://medium.com/metamask/calling-a-smart-contract-with-a-button-d278b1e76705]
+https://medium.com/metamask/calling-a-smart-contract-with-a-button-d278b1e76705
 
 ## Addresses used in this example
 
