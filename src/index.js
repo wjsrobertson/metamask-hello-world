@@ -1,24 +1,22 @@
 const Eth = require('ethjs-query')
 const EthContract = require('ethjs-contract')
 
-const addr = '0x36796F3a5CC9595D2D7BC8bb762D7395581A46E3'
-const toAddress = '0xA296A3aC56337690f3b07bEbc0bccC9d751136Dd'
 const value = 1
+var eth = null
 
 function startApp(web3) {
     const eth = new Eth(web3.currentProvider)
     const contract = new EthContract(eth)
     initContract(contract)
+
+    return eth
 }
 
 window.addEventListener('load', function() {
-
-    // Check if Web3 has been injected by the browser:
     if (typeof web3 !== 'undefined') {
-        // You have a web3 browser! Continue below!
-        startApp(web3);
+        eth = startApp(web3);
     } else {
-        document.write("Sorry, example this won't work unless you use a web3 browser or install metamask")
+        displayMessage("Sorry, example this won't work unless you use a web3 browser or install metamask")
     }
 })
 
@@ -45,21 +43,22 @@ const abi = [{
     "type": "function"
 }]
 
-const address = '0xF85D9E6a4B26C973695ab321018c7a66bfE7653E'
-
 function initContract (contract) {
     const MiniToken = contract(abi)
+    const address = document.querySelector('#contract').value
     const miniToken = MiniToken.at(address)
     listenForClicks(miniToken)
 }
 
 function listenForClicks (miniToken) {
-    var button = document.querySelector('button.transferFunds')
+    let button = document.querySelector('button.transferFunds')
     button.addEventListener('click', function() {
-        miniToken.transfer(toAddress, value, { from: addr })
+        let toAddress = document.querySelector('#to').value
+        let fromAddress = document.querySelector('#from').value
+
+        miniToken.transfer(toAddress, value, { from: fromAddress })
             .then(function (txHash) {
-                console.log('Transaction sent')
-                console.dir(txHash)
+                displayMessage('Transaction sent: ' + txHash + ' - waiting for it to be mined')
                 waitForTxToBeMined(txHash)
             })
             .catch(console.error)
@@ -76,4 +75,18 @@ async function waitForTxToBeMined (txHash) {
         }
     }
     indicateSuccess()
+}
+
+function indicateFailure(err) {
+    displayMessage("Oh poo - something went wrong")
+    console.error(err)
+}
+
+function indicateSuccess() {
+    displayMessage("Transaction has been mined - whoohoo!")
+}
+
+function displayMessage(msg) {
+    var messageMar = document.querySelector('#status')
+    messageMar.innerText = msg
 }
