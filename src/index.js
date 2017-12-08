@@ -1,92 +1,78 @@
-const Eth = require('ethjs-query')
-const EthContract = require('ethjs-contract')
+const messageSequenceAbi = require('./message-sequence-abi.js')
 
-const value = 1
-var eth = null
-
-function startApp(web3) {
-    const eth = new Eth(web3.currentProvider)
-    const contract = new EthContract(eth)
-    initContract(contract)
-
-    return eth
+function startApp() {
+    initAddress()
+    initContract()
+    displayBlockLoop()
 }
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     if (typeof web3 !== 'undefined') {
-        eth = startApp(web3);
+        startApp();
     } else {
-        displayMessage("Sorry, example this won't work unless you use a web3 browser or install metamask")
+        document.write("Sorry, example this won't work unless you use a web3 browser or install metamask")
     }
 })
 
-const abi = [{
-    "constant": false,
-    "inputs": [
-        {
-            "name": "_to",
-            "type": "address"
-        },
-        {
-            "name": "_value",
-            "type": "uint256"
-        }
-    ],
-    "name": "transfer",
-    "outputs": [
-        {
-            "name": "success",
-            "type": "bool"
-        }
-    ],
-    "payable": false,
-    "type": "function"
-}]
-
-function initContract (contract) {
-    const MiniToken = contract(abi)
-    const address = document.querySelector('#contract').value
-    const miniToken = MiniToken.at(address)
-    listenForClicks(miniToken)
-}
-
-function listenForClicks (miniToken) {
-    let button = document.querySelector('button.transferFunds')
-    button.addEventListener('click', function() {
-        let toAddress = document.querySelector('#to').value
-        let fromAddress = document.querySelector('#from').value
-
-        miniToken.transfer(toAddress, value, { from: fromAddress })
-            .then(function (txHash) {
-                displayMessage('Transaction sent: ' + txHash + ' - waiting for it to be mined')
-                waitForTxToBeMined(txHash)
-            })
-            .catch(console.error)
+function initAddress() {
+    web3.eth.getAccounts((err, accounts) => {
+        document.querySelector('#from').value = accounts[0]
     })
 }
 
-async function waitForTxToBeMined (txHash) {
-    let txReceipt
-    while (!txReceipt) {
-        try {
-            txReceipt = await eth.getTransactionReceipt(txHash)
-        } catch (err) {
-            return indicateFailure(err)
+function displayBlockLoop() {
+    web3.eth.getBlockNumber((err, blockNumber) => {
+        if (blockNumber) {
+            document.querySelector('#currentBlock').innerText = blockNumber.toString()
+            setTimeout(displayBlockLoop, 2000)
+            console.info(`on block ${blockNumber}`)
         }
-    }
-    indicateSuccess()
+    })
 }
 
-function indicateFailure(err) {
-    displayMessage("Oh poo - something went wrong")
-    console.error(err)
+function initContract() {
+    const address = document.querySelector('#contract').value
+    const MessageSequence = web3.eth.contract(messageSequenceAbi);
+    const messageSequence = MessageSequence.at(address)
+
+    const event = messageSequence.MessageChange()
+    event.watch(function (error, result) {
+        if (!error) {
+            console.log(`Event: ${result}`)
+        } else {
+            console.log(`Event error: ${error}`)
+        }
+    })
+
+    listenForClicks(messageSequence)
 }
 
-function indicateSuccess() {
-    displayMessage("Transaction has been mined - whoohoo!")
+function handleTransactionRequest(txHash) {
+    console.info(`Checking for transaction completion of ${txHash}`)
+    web3.eth.getTransaction(txHash, (err, transaction) => {
+        if (err) {
+            console.log(`getTransaction callback error: ${err} /`)
+        } else if (transaction) {
+            if (transaction.transactionIndex) {
+                document.querySelector('#statusMessage').innerText = `Mined on block ${transaction.blockNumber} with transaction index ${transaction.transactionIndex}`
+            } else {
+                console.info(`Transaction not yet complete ${txHash}`)
+                window.setTimeout(() => handleTransactionRequest(txHash), 2000)
+            }
+        }
+    })
 }
 
-function displayMessage(msg) {
-    var messageMar = document.querySelector('#status')
-    messageMar.innerText = msg
+function listenForClicks(messageSequence) {
+    let button = document.querySelector('#send')
+
+    button.addEventListener('click', function () {
+        let message = document.querySelector('#message').value
+        let fromAddress = document.querySelector('#from').value
+
+        messageSequence.update_message(message, {from: fromAddress}, (err, txHash) => {
+            document.querySelector('#statusMessage').innerText = `Message sent to blockchain with transaction ${txHash}`
+            handleTransactionRequest(txHash)
+        })
+    })
 }

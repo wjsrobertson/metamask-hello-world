@@ -28,13 +28,15 @@ Then navigate to http://127.0.0.1:9000/examples/ (or whatever your machine's IP 
 
 ## Building / Deploying Solidity Contract
 
-The contract is already deployed on the Ropsten test network here: [0xF85D9E6a4B26C973695ab321018c7a66bfE7653E](https://ropsten.etherscan.io/address/0xF85D9E6a4B26C973695ab321018c7a66bfE7653E)
+The contract is already deployed on the Ropsten test network here: [0xd87cbd002c8663ed2ee364646056d088d4683871](https://ropsten.etherscan.io/address/0xd87cbd002c8663ed2ee364646056d088d4683871)
 
-But you can deploy it using the instructions here: `sol/transfer_counter.sol` as per the middle bit of [this tutorial](https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e) - search for_"So go to the Remix IDE and paste the contract"_ to find the right section.
+But you can deploy it using the instructions here: `sol/message_sequence.sol` as per the middle bit of [this tutorial](https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e) - search for_"So go to the Remix IDE and paste the contract"_ to find the right section.
 
 ## Links
 
 A couple of pages with useful stuff:
+
+https://solidity.readthedocs.io/en/develop/contracts.html#events
 
 https://medium.com/metamask/calling-a-smart-contract-with-a-button-d278b1e76705
 
@@ -50,5 +52,9 @@ https://ropsten.etherscan.io/address/0x36796F3a5CC9595D2D7BC8bb762D7395581A46E3
 #### Sender - Will 2:
 https://ropsten.etherscan.io/address/0xA296A3aC56337690f3b07bEbc0bccC9d751136Dd
 
-#### Contract:
+#### Transfer Counter Contract:
 https://ropsten.etherscan.io/address/0xF85D9E6a4B26C973695ab321018c7a66bfE7653E
+
+#### Message Sequence Contract
+
+https://ropsten.etherscan.io/address/0xd87cbd002c8663ed2ee364646056d088d4683871
