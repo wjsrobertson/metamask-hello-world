@@ -25,7 +25,6 @@ function displayBlockLoop() {
         if (blockNumber) {
             document.querySelector('#currentBlock').innerText = blockNumber.toString()
             setTimeout(displayBlockLoop, 2000)
-            console.info(`on block ${blockNumber}`)
         }
     })
 }
@@ -54,6 +53,7 @@ function handleTransactionRequest(txHash) {
             console.log(`getTransaction callback error: ${err} /`)
         } else if (transaction) {
             if (transaction.transactionIndex) {
+                console.info(`Transaction complete ${txHash}`)
                 document.querySelector('#statusMessage').innerText = `Mined on block ${transaction.blockNumber} with transaction index ${transaction.transactionIndex}`
             } else {
                 console.info(`Transaction not yet complete ${txHash}`)
