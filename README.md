@@ -49,12 +49,6 @@ https://sonnguyen.ws/hacked-parity-multisig-wallet-ropsten-testnet/
 #### Sender - Will 1:
 https://ropsten.etherscan.io/address/0x36796F3a5CC9595D2D7BC8bb762D7395581A46E3
 
-#### Sender - Will 2:
-https://ropsten.etherscan.io/address/0xA296A3aC56337690f3b07bEbc0bccC9d751136Dd
-
-#### Transfer Counter Contract:
-https://ropsten.etherscan.io/address/0xF85D9E6a4B26C973695ab321018c7a66bfE7653E
-
 #### Message Sequence Contract
 
 https://ropsten.etherscan.io/address/0xd87cbd002c8663ed2ee364646056d088d4683871
