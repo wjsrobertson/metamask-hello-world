@@ -34,12 +34,14 @@ function initContract() {
     const MessageSequence = web3.eth.contract(messageSequenceAbi);
     const messageSequence = MessageSequence.at(address)
 
-    const event = messageSequence.MessageChange()
-    event.watch(function (error, result) {
-        if (!error) {
-            console.log(`Event: ${result}`)
-        } else {
-            console.log(`Event error: ${error}`)
+    let event = messageSequence.MessageChange()
+    event.watch((error, result) => {
+        if (result) {
+            console.log("Event result: " + result.event)
+            let args = result.args
+            document.querySelector('#eventMessage').innerText = `Message changed to "${args['_new_message']}" from "${args['_old_message']}" by account ${args['_sender']}`
+        } else if (error) {
+            console.error("Event error: " + error)
         }
     })
 
@@ -49,9 +51,7 @@ function initContract() {
 function handleTransactionRequest(txHash) {
     console.info(`Checking for transaction completion of ${txHash}`)
     web3.eth.getTransaction(txHash, (err, transaction) => {
-        if (err) {
-            console.log(`getTransaction callback error: ${err} /`)
-        } else if (transaction) {
+        if (transaction) {
             if (transaction.transactionIndex) {
                 console.info(`Transaction complete ${txHash}`)
                 document.querySelector('#statusMessage').innerText = `Mined on block ${transaction.blockNumber} with transaction index ${transaction.transactionIndex}`
@@ -59,6 +59,8 @@ function handleTransactionRequest(txHash) {
                 console.info(`Transaction not yet complete ${txHash}`)
                 window.setTimeout(() => handleTransactionRequest(txHash), 2000)
             }
+        } else if (err) {
+            console.log(`getTransaction callback error: ${err} /`)
         }
     })
 }

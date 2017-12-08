@@ -38,9 +38,9 @@ module.exports = [
         "anonymous": false,
         "inputs": [
             {
-                "indexed": false,
+                "indexed": true,
                 "name": "_sender",
-                "type": "string"
+                "type": "address"
             },
             {
                 "indexed": false,
