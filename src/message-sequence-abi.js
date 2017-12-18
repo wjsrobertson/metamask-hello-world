@@ -3,11 +3,11 @@ module.exports = [
         "constant": false,
         "inputs": [
             {
-                "name": "new_message",
+                "name": "newMessage",
                 "type": "string"
             }
         ],
-        "name": "update_message",
+        "name": "updateMessage",
         "outputs": [
             {
                 "name": "",
@@ -39,17 +39,17 @@ module.exports = [
         "inputs": [
             {
                 "indexed": true,
-                "name": "_sender",
+                "name": "sender",
                 "type": "address"
             },
             {
                 "indexed": false,
-                "name": "_old_message",
+                "name": "oldMessage",
                 "type": "string"
             },
             {
                 "indexed": false,
-                "name": "_new_message",
+                "name": "newMessage",
                 "type": "string"
             }
         ],

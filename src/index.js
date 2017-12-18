@@ -39,7 +39,7 @@ function initContract() {
         if (result) {
             console.log("Event result: " + result.event)
             let args = result.args
-            document.querySelector('#eventMessage').innerText = `Message changed to "${args['_new_message']}" from "${args['_old_message']}" by account ${args['_sender']}`
+            document.querySelector('#eventMessage').innerText = `Message changed to "${args['newMessage']}" from "${args['oldMessage']}" by account ${args['sender']}`
         } else if (error) {
             console.error("Event error: " + error)
         }
@@ -72,7 +72,7 @@ function listenForClicks(messageSequence) {
         let message = document.querySelector('#message').value
         let fromAddress = document.querySelector('#from').value
 
-        messageSequence.update_message(message, {from: fromAddress}, (err, txHash) => {
+        messageSequence.updateMessage(message, {from: fromAddress}, (err, txHash) => {
             document.querySelector('#statusMessage').innerText = `Message sent to blockchain with transaction ${txHash}`
             handleTransactionRequest(txHash)
         })

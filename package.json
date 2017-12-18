@@ -8,7 +8,8 @@
     "build": "mkdir -p build/ && npm run browserify -- --debug -o build/metamask-hello-world.js",
     "dev": "npm run build && node ./scripts/budo",
     "dist": "mkdir -p dist/ && npm run browserify -s -- --debug | exorcist dist/metamask-hello-world.js.map > dist/metamask-hello-world.js && uglifyjs dist/metamask-hello-world.js -c warnings=false -m -o dist/metamask-hello-world.min.js",
-    "test": "karma start ./tests/karma.conf.js"
+    "test": "karma start ./tests/karma.conf.js",
+    "integration-test": "truffle compile && truffle migrate && truffle test"
   },
   "repository": {
     "type": "git",
@@ -25,13 +26,13 @@
   "homepage": "https://github.com/wjsrobertson/metamask-hello-world",
   "dependencies": {
     "lodash": "4.13.1",
-    "ethjs-contract": "0.1.7",
-    "ethjs-query": "0.3.2"
+    "web3": "1.0.0-beta.26"
   },
   "devDependencies": {
     "browserify": "^13.0.1",
     "budo": "^8.3.0",
     "exorcist": "^0.4.0",
-    "karma": "^0.13.22"
+    "mocha": "4.0.1",
+    "ethereumjs-testrpc": "6.0.3"
   }
 }
