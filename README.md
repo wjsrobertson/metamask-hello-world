@@ -53,13 +53,13 @@ npm run integration-test
 
 This will compile the solidity contracts in `contracts` then deploy to the testrpc network (see `truffle.js`) before running the tests in `tests`.
 
+The `npm run integration-test` step is just running a few truffle commands - see `package.json` for details
+
 ## Building / Deploying Solidity Contract
 
 The contract is already deployed on the Ropsten test network here: [0xc9671874b9f8b347558344dc0c80e3ac382ff127](https://ropsten.etherscan.io/address/0xc9671874b9f8b347558344dc0c80e3ac382ff127)
 
 But you can deploy it using the instructions here: `contracts/message_sequence.sol` as per the middle bit of [this tutorial](https://medium.com/@merunasgrincalaitis/the-ultimate-end-to-end-tutorial-to-create-and-deploy-a-fully-descentralized-dapp-in-ethereum-18f0cf6d7e0e) - search for_"So go to the Remix IDE and paste the contract"_ to find the right section.
-
-The `npm run integration-test` step is just running a few truffle commands - see `package.json` for details
 
 ## Links
 
